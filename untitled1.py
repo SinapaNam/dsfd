@@ -43,16 +43,10 @@ reduced = pca.fit_transform(X)
 reduced_df = pd.DataFrame(reduced, columns=["PCA1", "PCA2"])
 
 
-
-# Plot clusters
+# Plotting
 fig, ax = plt.subplots()
-for cluster in range(k):
-    cluster_data = reduced_df[reduced_df["Cluster"] == cluster]
-    ax.scatter(cluster_data["PCA1"], cluster_data["PCA2"], label=f"Cluster {cluster}")
-ax.set_title("Clusters (2D PCA Projection)")
-ax.set_xlabel("PCA1")
-ax.set_ylabel("PCA2")
-ax.legend()
+scatter = ax.scatter(X_pca[:, 0], X_pca[:, 1], c=y_kmeans, cmap='tab10', s=50)
+
 
 # Add legend with cluster labels
 handles, labels = scatter.legend_elements()
