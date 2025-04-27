@@ -36,6 +36,8 @@ y_kmeans = model.fit_predict(X)
 pca = PCA(n_components=2)
 X_pca = pca.fit_transform(X)
 centers_pca = pca.transform(model.cluster_centers_)
+reduced_df = pd.DataFrame(reduced, columns=["PCA1", "PCA2"])
+reduced_df["Cluster"] = labels
 
 # Plotting
 fig, ax = plt.subplots()
