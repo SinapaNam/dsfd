@@ -32,24 +32,21 @@ feature_names = iris.feature_names
 model = KMeans(n_clusters=k, random_state=42)
 y_kmeans = model.fit_predict(X)
 
-# PCA for visualization
+# Dimensionality reduction for visualization
 pca = PCA(n_components=2)
-X_pca = pca.fit_transform(X)
-
+reduced = pca.fit_transform(X)
 reduced_df = pd.DataFrame(reduced, columns=["PCA1", "PCA2"])
 reduced_df["Cluster"] = labels
 
-# Plotting
+# Plot clusters
 fig, ax = plt.subplots()
 for cluster in range(k):
     cluster_data = reduced_df[reduced_df["Cluster"] == cluster]
     ax.scatter(cluster_data["PCA1"], cluster_data["PCA2"], label=f"Cluster {cluster}")
-
-
-# Labels & title
 ax.set_title("Clusters (2D PCA Projection)")
 ax.set_xlabel("PCA1")
 ax.set_ylabel("PCA2")
+ax.legend()
 
 # Add legend with cluster labels
 handles, labels = scatter.legend_elements()
